@@ -1,0 +1,27 @@
+<style>
+  .my-custom-class {
+    display: flex;
+    backdrop-filter: blur(8px);
+  }
+</style>
+
+<div>
+  <h2>List of Pictures</h2>
+  <div class="flex w-full gap-6 flex-wrap justify-center">
+    <div class="bg-contain bg-no-repeat w-[600px] border-red-50 h-[600px] drop-shadow-md"
+      *ngFor="let item of imagesWithText; let index = index" [style.backgroundImage]="calcBackgroundImage(item.imageName, item.isFlipped)">
+      <div class="my-custom-class h-16">
+        <div class="w-[30%] text-red-900 text-5xl font-serif drop-shadow-md">{{item.imageName}}</div>
+        <div class="text-red-900 text-[20px] underline pt-4">
+          <b>{{item.text}}</b>
+        </div>
+      </div>
+      <div
+        class="cursor-pointer w-16 h-16 backdrop-blur-[2px] fixed bottom-6 right-6 bg-[url('/assets/images/refresh-reverse.svg')] bg-no-repeat bg-contain"
+        (click)="onClick(index)"
+      >
+      </div>
+    </div>
+  </div>
+
+</div>
