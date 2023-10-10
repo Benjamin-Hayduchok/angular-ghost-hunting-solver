@@ -1,5 +1,5 @@
 <style>
-  .my-custom-class {
+  .blur-effect {
     display: flex;
     backdrop-filter: blur(8px);
   }
@@ -14,22 +14,22 @@
         <label class="pl-5 pr-5 inline-flex">
           Hour:
           <div class="pl-1 text-black">
-            <input class="number-input" type="number" />
+            <input class="number-input" type="number" value={{hour}} min="1" max="12" (change)="hoursChanged($event)"/>
           </div>
         </label>
         <label class="inline-flex">
           Minutes:
           <div class="pl-1 text-black">
-            <input class="number-input" type="number" />
+            <input class="number-input" type="number" value={{minutes}} min="0" max="59" (change)="minutesChanged($event)"/>
           </div>
         </label>
-        <button class="red-clear-button">Clear</button>
+        <button class="red-clear-button" (click)="clearTime()">Clear</button>
       </div>
     </div>
     <div class="bg-contain bg-no-repeat w-[600px] border-red-50 h-[600px] drop-shadow-md"
       *ngFor="let item of imagesWithText; let index = index"
       [style.backgroundImage]="calcBackgroundImage(item.imageName, item.isFlipped)">
-      <div class="my-custom-class h-16">
+      <div class="blur-effect h-16">
         <div class="w-[30%] text-red-900 text-5xl font-serif drop-shadow-md">{{item.imageName}}</div>
         <div class="text-red-900 text-[20px] underline pt-4">
           <b>{{item.text}}</b>
@@ -37,7 +37,7 @@
       </div>
       <div
         class="cursor-pointer w-16 h-16 backdrop-blur-[2px] fixed bottom-6 right-6 bg-[url('/assets/images/refresh-reverse.svg')] bg-no-repeat bg-contain"
-        (click)="onClick(index)">
+        (click)="flipImage(index)">
       </div>
     </div>
   </div>
