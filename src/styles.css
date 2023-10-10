@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .number-input {
+    @apply text-black w-14 rounded-md text-center;
+  }
+  .clear-button {
+    @apply text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ml-5 max-h-10;
+  }
+  .red-clear-button {
+    background-color: darkred !important;
+    border: 2px solid #e53e3e; /* Red border color */
+    color: #e53e3e; /* Red text color */
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    border-radius: 0.65rem; /* Rounded corners */
+    cursor: pointer;
+    max-height: 2.5rem;
+    text-align: center;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    margin-left: 1.25rem !important;
+  }
+  
+  /* Hover styles */
+  .red-clear-button:hover {
+    background-color: #e53e3e !important; /* Red background on hover */
+    color: #fff !important; /* White text color on hover */
+  }
+}
