@@ -14,48 +14,49 @@ export class PictureListComponent {
     { imageName: '10-12', text: 'ENTERING PUZZLE ROOM', isFlipped: false },
     { imageName: '12-1', text: 'ENTERING PUZZLE ROOM', isFlipped: false },
   ];
-  imagesWithText: { imageName: string; text: string; isFlipped: boolean }[] = this.basePatterns;
+
+  imagesWithText: { imageName: string; text: string; isFlipped: boolean }[] =
+    this.basePatterns;
+
+  hour: string = '0';
+  minutes: string = '0';
+
   setImageView() {
-    console.log('this.hour', typeof this.hour)
-    let hour = parseInt(this.hour);
+    const hour = parseInt(this.hour);
     if (hour === 0) return this.basePatterns;
-    if (hour <= 2) return [this.basePatterns[0]];
-    if (hour <= 4) return [this.basePatterns[1]];
-    if (hour <= 7) return [this.basePatterns[2]];
-    if (hour <= 9) return [this.basePatterns[3]];
-    if (hour <= 11) return [this.basePatterns[4]];
-    if (hour === 12) {
-      console.log("must be true")
-      return [this.basePatterns[5]];
+
+    const patternIndex = Math.floor((hour - 1) / 2);
+    if (patternIndex >= 0 && patternIndex < this.basePatterns.length) {
+      return [this.basePatterns[patternIndex]];
     }
+
     return this.basePatterns;
   }
-  hour: string = "0";
-  minutes: string = "0";
+
   hoursChanged(event: any) {
     this.hour = event.target.value;
     this.imagesWithText = this.setImageView();
   }
+
   minutesChanged(event: any) {
     this.minutes = event.target.value;
   }
+
   clearTime() {
-    this.hour = "0";
-    this.minutes = "0";
+    this.hour = '0';
+    this.minutes = '0';
     this.imagesWithText = this.basePatterns;
   }
+
   flipImage(index: number): void {
-    console.log('index', index);
-    this.imagesWithText[index].isFlipped =
-      !this.imagesWithText[index].isFlipped;
-    console.log(
-      'this.imagesWithText[index].isFlipped',
-      this.imagesWithText[index].isFlipped
-    );
+    if (index >= 0 && index < this.imagesWithText.length) {
+      this.imagesWithText[index].isFlipped =
+        !this.imagesWithText[index].isFlipped;
+    }
   }
+
   calcBackgroundImage(imageName: string, isFlipped: boolean): string {
-    return isFlipped
-      ? 'url(assets/images/' + imageName + '-rotated.png)'
-      : 'url(assets/images/' + imageName + '.png)';
+    const suffix = isFlipped ? '-rotated' : '';
+    return `url(assets/images/${imageName}${suffix}.png)`;
   }
 }
